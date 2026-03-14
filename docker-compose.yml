@@ -1,0 +1,54 @@
+name: clawcube
+
+services:
+  gateway:
+    image: clawcube:bookworm-${OPENCLAW_VER}
+    build:
+      context: .
+      args:
+        EXTRA_PKGS: ${EXTRA_PKGS}
+        OPENCLAW_VER: ${OPENCLAW_VER}
+    environment:
+      HOME: /home/claw
+      TERM: xterm-256color
+      TZ: ${OPENCLAW_TZ:-UTC}
+    env_file:
+      - .env.local
+    volumes:
+      - ${DATA_PATH}/home:/home/claw
+      - ${DATA_PATH}/tmp:/tmp/openclaw
+    ports:
+      - "${OPENCLAW_GATEWAY_PORT:-18789}:18789"
+      - "${OPENCLAW_BRIDGE_PORT:-18790}:18790"
+    init: true
+    restart: unless-stopped
+    command: [
+      "node", "openclaw.mjs", "gateway",
+      "--bind", "${OPENCLAW_GATEWAY_BIND:-lan}",
+      "--port", "18789",
+    ]
+
+  cli:
+    image: clawcube:bookworm-${OPENCLAW_VER}
+    network_mode: "service:gateway"
+    cap_drop:
+      - NET_RAW
+      - NET_ADMIN
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      HOME: /home/claw
+      TERM: xterm-256color
+      BROWSER: echo
+      TZ: ${OPENCLAW_TZ:-UTC}
+    env_file:
+      - .env.local
+    volumes:
+      - ${DATA_PATH}/home:/home/claw
+      - ${DATA_PATH}/tmp:/tmp/openclaw
+    stdin_open: true
+    tty: true
+    init: true
+    entrypoint: ["node", "openclaw.mjs"]
+    profiles:
+      - cli

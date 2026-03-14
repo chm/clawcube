@@ -1,0 +1,13 @@
+# git
+/.git/
+/.gitignore
+
+# docker
+/Dockerfile
+/Dockerfile.*
+/docker-compose.*
+
+# config
+/.env
+/.env.*
+
