@@ -10,8 +10,9 @@ ARG EXTRA_PKGS="iproute2 jq"
 RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
     set -ex ; \
+    apt-get update ; \
+    DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends ; \
     if [ -n "$EXTRA_PKGS" ]; then \
-      apt-get update ; \
       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $EXTRA_PKGS ; \
     fi
 
