@@ -14,6 +14,7 @@ services:
       TZ: ${OPENCLAW_TZ:-UTC}
     env_file:
       - .env.local
+    hostname: clawCube-gw
     volumes:
       - ${DATA_PATH}/home:/home/claw
       - ${DATA_PATH}/tmp:/tmp/openclaw
