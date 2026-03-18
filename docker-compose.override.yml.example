@@ -4,9 +4,11 @@ services:
     #network_mode: host
     #ports: !reset []
     #volumes:
-    #  - ${DATA_PATH}/tmp:/tmp/openclaw
+    #  - ../data/home:/home/claw
+    #  - ../data/tmp:/tmp/openclaw
 
   cli:
     #network_mode: host
     #volumes:
-    #  - ${DATA_PATH}/tmp:/tmp/openclaw
+    #  - ../data/home:/home/claw
+    #  - ../data/tmp:/tmp/openclaw

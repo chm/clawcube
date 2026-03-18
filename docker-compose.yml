@@ -16,8 +16,8 @@ services:
       - .env.local
     hostname: clawCube-gw
     volumes:
-      - ${DATA_PATH}/home:/home/claw
-      - ${DATA_PATH}/tmp:/tmp/openclaw
+      - home:/home/claw
+      - tmp:/tmp/openclaw
     ports:
       - "${OPENCLAW_GATEWAY_PORT:-18789}:18789"
       - "${OPENCLAW_BRIDGE_PORT:-18790}:18790"
@@ -45,11 +45,15 @@ services:
     env_file:
       - .env.local
     volumes:
-      - ${DATA_PATH}/home:/home/claw
-      - ${DATA_PATH}/tmp:/tmp/openclaw
+      - home:/home/claw
+      - tmp:/tmp/openclaw
     stdin_open: true
     tty: true
     init: true
     entrypoint: ["node", "openclaw.mjs"]
     profiles:
       - cli
+
+volumes:
+  home:
+  tmp:
