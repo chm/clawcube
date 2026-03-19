@@ -1,14 +1,14 @@
 # syntax=docker/dockerfile:1.7
 
-ARG NODE_IMAGE="node:24-bookworm"
+ARG NODE_IMAGE="node:24-trixie"
 FROM ${NODE_IMAGE}
 
 RUN corepack enable
 
 # Extra APT packages
 ARG EXTRA_PKGS="iproute2 jq"
-RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
+RUN --mount=type=cache,id=openclaw-trixie-apt-cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=openclaw-trixie-apt-lists,target=/var/lib/apt,sharing=locked \
     set -ex ; \
     apt-get update ; \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends ; \
