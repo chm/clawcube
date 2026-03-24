@@ -2,7 +2,7 @@ name: clawcube
 
 services:
   gateway:
-    image: clawcube:${OPENCLAW_VER}
+    image: localhost/clawcube:${OPENCLAW_VER}
     build:
       context: .
       args:
@@ -30,7 +30,7 @@ services:
     ]
 
   cli:
-    image: clawcube:${OPENCLAW_VER}
+    image: localhost/clawcube:${OPENCLAW_VER}
     network_mode: "service:gateway"
     cap_drop:
       - NET_RAW
