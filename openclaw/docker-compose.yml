@@ -1,7 +1,6 @@
-name: clawcube
-
 services:
   gateway:
+    container_name: ${COMPOSE_PROJECT_NAME}-gw
     image: localhost/clawcube:${OPENCLAW_VER}
     build:
       context: .
