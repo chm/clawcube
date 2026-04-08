@@ -28,6 +28,13 @@ RUN --mount=type=cache,id=openclaw-pnpm-cache,target=/root,sharing=locked \
     set -ex ; \
     export PNPM_HOME=/.pnpm-store ; \
     pnpm install --dir "$INSTALL_DIR" openclaw@"$OPENCLAW_VER" ; \
+    pnpm add --dir "$INSTALL_DIR" \
+      @larksuiteoapi/node-sdk \
+      @buape/carbon \
+      @whiskeysockets/baileys \
+      @slack/web-api @slack/bolt \
+      grammy @grammyjs/runner @grammyjs/transformer-throttler \
+      discord-api-types @discordjs/voice ; \
     rm -fr /.pnpm-store ; \
     ln -s node_modules/openclaw/openclaw.mjs "$INSTALL_DIR"/openclaw.mjs ; \
     ln -s "$INSTALL_DIR"/openclaw.mjs /usr/local/bin/openclaw
