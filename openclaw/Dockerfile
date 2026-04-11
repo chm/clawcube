@@ -35,7 +35,8 @@ RUN --mount=type=cache,id=openclaw-pnpm-cache,target=/root,sharing=locked \
 USER claw
 
 ENV NODE_ENV="production"
-ENV NODE_COMPILE_CACHE="/tmp/compile-cache-openclaw"
+ENV NODE_COMPILE_CACHE="/var/tmp/openclaw-compile-cache"
+ENV OPENCLAW_NO_RESPAWN=1
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=5 \
   CMD node -e "fetch('http://127.0.0.1:18789/healthz').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
