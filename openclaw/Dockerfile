@@ -3,9 +3,6 @@
 ARG NODE_IMAGE="node:24-trixie"
 FROM ${NODE_IMAGE}
 
-COPY ./files/tailscale-archive-keyring.gpg /usr/share/keyrings/
-COPY ./files/tailscale-trixie.sources /etc/apt/sources.list.d/
-
 # Extra APT packages
 ARG EXTRA_PKGS="iproute2 jq"
 RUN --mount=type=cache,id=openclaw-trixie-apt-cache,target=/var/cache/apt,sharing=locked \
