@@ -16,7 +16,7 @@ services:
     hostname: clawCube-gw
     volumes:
       - home:/home/claw
-      - tmp:/tmp/openclaw
+      - log:/tmp/openclaw
     ports:
       - "${OPENCLAW_GATEWAY_PORT:-18789}:18789"
       - "${OPENCLAW_BRIDGE_PORT:-18790}:18790"
@@ -45,7 +45,7 @@ services:
       - .env.local
     volumes:
       - home:/home/claw
-      - tmp:/tmp/openclaw
+      - log:/tmp/openclaw
     stdin_open: true
     tty: true
     init: true
@@ -55,4 +55,4 @@ services:
 
 volumes:
   home:
-  tmp:
+  log:
