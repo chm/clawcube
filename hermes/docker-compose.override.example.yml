@@ -1,0 +1,17 @@
+name: hermes
+
+x-volumes: &hermes-volumes
+  - ../../data/hermes/data:/opt/data
+
+services:
+  gateway:
+    #network_mode: host
+    volumes: *hermes-volumes
+
+  dashboard:
+    #network_mode: host
+    volumes: *hermes-volumes
+
+  cli:
+    #network_mode: host
+    volumes: *hermes-volumes

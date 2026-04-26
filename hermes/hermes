@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+get_script_dir() {
+  local source="${BASH_SOURCE[0]}"
+  while [ -h "$source" ]; do
+    local dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+    source="$(readlink "$source")"
+    [[ $source != /* ]] && source="$dir/$source"
+  done
+  cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd
+}
+
+SCRIPT_DIR="$(get_script_dir)"
+
+docker compose --project-directory "$SCRIPT_DIR" run --rm cli "$@"

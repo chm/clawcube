@@ -1,0 +1,45 @@
+
+x-envs: &hermes-envs
+  HERMES_UID: ${HERMES_UID:-10000}
+  HERMES_GID: ${HERMES_GID:-10000}
+
+x-common: &hermes-common
+  image: docker.io/nousresearch/hermes-agent:v${HERMES_VER}
+  env_file:
+    - ./app.env
+  volumes:
+    - data:/opt/data
+
+services:
+  gateway:
+    container_name: hermes
+    <<: *hermes-common
+    restart: unless-stopped
+    environment:
+      <<: *hermes-envs
+      API_SERVER_ENABLED: true
+      API_SERVER_HOST: "0.0.0.0"
+    command: ["gateway", "run"]
+
+  dashboard:
+    container_name: hermes-dashboard
+    <<: *hermes-common
+    restart: unless-stopped
+    environment:
+      <<: *hermes-envs
+      GATEWAY_HEALTH_URL: "http://gateway:8642/health/detailed"
+    ports:
+      - "${HERMES_PORT:-127.0.0.1:9119}:9119"
+    command: ["dashboard", "--host", "0.0.0.0", "--insecure", "--no-open"]
+
+  cli:
+    <<: *hermes-common
+    environment: *hermes-envs
+    stdin_open: true
+    tty: true
+    init: true
+    profiles:
+      - cli
+
+volumes:
+  data:

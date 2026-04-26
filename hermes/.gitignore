@@ -1,0 +1,4 @@
+# Hermes config files
+/app.env
+/docker-compose.override.yml
+
