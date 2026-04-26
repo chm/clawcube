@@ -28,7 +28,9 @@ RUN --mount=type=cache,id=openclaw-pnpm-cache,target=/root,sharing=locked \
     set -ex ; \
     export PNPM_HOME=/.pnpm-store ; \
     pnpm install --dir "$INSTALL_DIR" openclaw@"$OPENCLAW_VER" ; \
-    chown -R claw:claw node_modules/openclaw/dist/extensions/ ; \
+    for i in node_modules/openclaw/dist/extensions/* ; do \
+      [ -f $i/package.json ] && pnpm install --dir $i --prod ; \
+    done ; \
     rm -fr /.pnpm-store ; \
     ln -s node_modules/openclaw/openclaw.mjs "$INSTALL_DIR"/openclaw.mjs ; \
     ln -s "$INSTALL_DIR"/openclaw.mjs /usr/local/bin/openclaw
