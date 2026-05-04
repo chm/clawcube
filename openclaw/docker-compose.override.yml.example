@@ -15,7 +15,7 @@ services:
     volumes: *claw-volumes
 
   tailscale:
-    image: docker.io/tailscale/tailscale
+    image: docker.io/tailscale/tailscale:stable
     network_mode: "service:gateway"
     environment:
       - TS_AUTHKEY=
