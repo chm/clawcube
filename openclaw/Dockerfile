@@ -35,7 +35,7 @@ RUN --mount=type=cache,id=openclaw-pnpm-cache,target=/root,sharing=locked \
     --mount=type=cache,id=openclaw-tmp-cache,target=/tmp,sharing=locked \
     set -ex ; \
     export PNPM_HOME=/.pnpm-store ; \
-    corepack use pnpm@10.33.2 ; \
+    corepack use pnpm@latest-10 ; \
     pnpm install --dir "$INSTALL_DIR" openclaw@"$OPENCLAW_VER" ; \
     rm -fr /.pnpm-store ; \
     ln -s node_modules/openclaw/openclaw.mjs "$INSTALL_DIR"/openclaw.mjs ; \
