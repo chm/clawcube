@@ -1,0 +1,15 @@
+services:
+  picoclaw:
+    image: ghcr.io/sipeed/picoclaw:launcher
+    container_name: picoclaw-launcher
+    restart: unless-stopped
+    environment:
+      - PICOCLAW_GATEWAY_HOST=0.0.0.0
+    ports:
+      - "${PICOCLAW_WEB_PORT}:18800"
+      - "${PICOCLAW_GW_PORT}:18790"
+    volumes:
+      - home:/root
+
+volumes:
+  home:

@@ -1,0 +1,3 @@
+# PicoClaw config files
+/.env.*
+/docker-compose.override.yml
