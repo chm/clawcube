@@ -3,7 +3,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}-gw
     image: localhost/clawcube:${OPENCLAW_VER}
     build:
-      context: .
+      context: ./build/
       args:
         DEBIAN_MIRROR: ${DEBIAN_MIRROR:-}
         EXTRA_PKGS: ${EXTRA_PKGS}
