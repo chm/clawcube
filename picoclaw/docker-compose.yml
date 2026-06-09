@@ -1,7 +1,11 @@
 services:
   picoclaw:
-    image: ghcr.io/sipeed/picoclaw:launcher
     container_name: picoclaw-launcher
+    image: localhost/picoclaw
+    build:
+      context: ./build/
+      args:
+        EXTRA_PKGS: ${EXTRA_PKGS}
     restart: unless-stopped
     environment:
       - PICOCLAW_GATEWAY_HOST=0.0.0.0
