@@ -5,7 +5,7 @@ services:
     build:
       context: ./build/
       args:
-        EXTRA_PKGS: ${EXTRA_PKGS}
+        EXTRA_PKGS: ${EXTRA_PKGS:-}
     restart: unless-stopped
     environment:
       - PICOCLAW_GATEWAY_HOST=0.0.0.0
