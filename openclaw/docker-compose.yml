@@ -6,7 +6,7 @@ services:
       context: ./build/
       args:
         DEBIAN_MIRROR: ${DEBIAN_MIRROR:-}
-        EXTRA_PKGS: ${EXTRA_PKGS}
+        EXTRA_PKGS: ${EXTRA_PKGS:-}
         OPENCLAW_VER: ${OPENCLAW_VER}
     environment:
       HOME: /home/claw

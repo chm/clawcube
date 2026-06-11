@@ -6,7 +6,8 @@ FROM ${NODE_IMAGE}
 ARG DEBIAN_MIRROR=""
 
 # Extra APT packages
-ARG EXTRA_PKGS="iproute2 jq"
+ARG BASE_PKGS="iproute2 jq"
+ARG EXTRA_PKGS
 RUN --mount=type=cache,id=openclaw-trixie-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-trixie-apt-lists,target=/var/lib/apt,sharing=locked \
     set -ex ; \
@@ -18,9 +19,7 @@ RUN --mount=type=cache,id=openclaw-trixie-apt-cache,target=/var/cache/apt,sharin
     fi ; \
     apt-get update ; \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends ; \
-    if [ -n "$EXTRA_PKGS" ]; then \
-      DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $EXTRA_PKGS ; \
-    fi
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $BASE_PKGS $EXTRA_PKGS
 
 ENV INSTALL_DIR="/app"
 WORKDIR ${INSTALL_DIR}
