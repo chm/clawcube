@@ -1,9 +1,11 @@
 name: picoclaw
 
 x-volumes: &claw-volumes
-  - ../../data/picoclaw/home:/root
+  - ../../data/picoclaw/home:/home/pico
 
 services:
   picoclaw:
     volumes: *claw-volumes
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
 

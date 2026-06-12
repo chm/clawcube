@@ -1,19 +1,21 @@
 services:
   picoclaw:
-    container_name: picoclaw-launcher
+    container_name: ${COMPOSE_PROJECT_NAME}-gw
     image: localhost/picoclaw
     build:
       context: ./build/
       args:
         EXTRA_PKGS: ${EXTRA_PKGS:-}
     restart: unless-stopped
+    hostname: pico-gw
     environment:
       - PICOCLAW_GATEWAY_HOST=0.0.0.0
+      - TZ=Asia/Shanghai
     ports:
       - "${PICOCLAW_WEB_PORT}:18800"
       - "${PICOCLAW_GW_PORT}:18790"
     volumes:
-      - home:/root
+      - home:/home/pico
 
 volumes:
   home:
