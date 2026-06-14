@@ -1,0 +1,10 @@
+name: caddy
+
+services:
+  caddy:
+    volumes:
+      - ../../data/caddy/data:/data
+      - ../../data/caddy/log:/log
+      - ../../data/caddy/www:/www
+
+#
