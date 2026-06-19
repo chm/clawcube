@@ -5,6 +5,7 @@ services:
     build:
       context: ./build/
       args:
+        ALPINE_MIRROR: ${ALPINE_MIRROR:-}
         EXTRA_PKGS: ${EXTRA_PKGS:-}
     restart: unless-stopped
     hostname: pico-gw
