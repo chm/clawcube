@@ -41,3 +41,9 @@ picoclaw.clawcube.lan {
 
   reverse_proxy 127.0.0.1:18800
 }
+
+zeroclaw.clawcube.lan {
+  import conf-ca-clawcube
+
+  reverse_proxy 127.0.0.1:42617
+}

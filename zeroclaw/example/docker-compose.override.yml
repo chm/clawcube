@@ -1,0 +1,13 @@
+name: zeroclaw
+
+x-volumes: &claw-volumes
+  - ../../data/zeroclaw/data:/zeroclaw-data
+
+services:
+  zeroclaw:
+    user: "${ZEROCLAW_USER:-1000}"
+    volumes: *claw-volumes
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
+
+#
