@@ -16,7 +16,7 @@ services:
       - "${PICOCLAW_WEB_PORT}:18800"
       - "${PICOCLAW_GW_PORT}:18790"
     volumes:
-      - home:/home/pico
+      - home:/home/claw
 
 volumes:
   home:

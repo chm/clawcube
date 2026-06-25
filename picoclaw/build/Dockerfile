@@ -7,14 +7,14 @@ ARG BASE_PKGS="bash git iproute2 jq openssh-client-default"
 ARG EXTRA_PKGS
 
 RUN set -ex ; \
-    addgroup -g 1000 pico ; \
-    adduser -D -u 1000 -G pico pico ; \
+    addgroup -g 1000 claw ; \
+    adduser -D -u 1000 -G claw claw ; \
     if [ -n "$ALPINE_MIRROR" ]; then \
       MIRROR="$(echo "$ALPINE_MIRROR" | sed 's#/$##')" ; \
       sed -i "s|https\?://dl-cdn\.alpinelinux\.org/alpine|${MIRROR}/alpine|g" /etc/apk/repositories ; \
     fi ; \
     apk add --no-cache $BASE_PKGS $EXTRA_PKGS
 
-USER pico
+USER claw
 
 #
