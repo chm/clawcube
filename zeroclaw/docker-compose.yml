@@ -1,8 +1,18 @@
 services:
   zeroclaw:
     container_name: ${COMPOSE_PROJECT_NAME}-gw
-    image: ghcr.io/zeroclaw-labs/zeroclaw:${ZEROCLAW_VERSION:-}debian
+    hostname: zeroClaw-gw
+    image: localhost/zeroclaw:${ZEROCLAW_VER:-latest}
+    build:
+      context: ./build/
+      args:
+        DEBIAN_MIRROR: ${DEBIAN_MIRROR:-}
+        EXTRA_PKGS: ${EXTRA_PKGS:-}
+        ZEROCLAW_VER: ${ZEROCLAW_VER:-}
+        ZEROCLAW_UID: ${ZEROCLAW_UID:-1000}
+        ZEROCLAW_GID: ${ZEROCLAW_GID:-1000}
     restart: unless-stopped
+    user: "${ZEROCLAW_UID:-1000}"
     environment:
       - ZEROCLAW_gateway__host=0.0.0.0
       - ZEROCLAW_gateway__port=42617
@@ -22,5 +32,3 @@ services:
 
 volumes:
   zeroclaw-data:
-
-#

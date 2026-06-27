@@ -5,9 +5,8 @@ x-volumes: &claw-volumes
 
 services:
   zeroclaw:
-    user: "${ZEROCLAW_USER:-1000}"
     volumes: *claw-volumes
-    #extra_hosts:
-    #  - "host.docker.internal:host-gateway"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 #
