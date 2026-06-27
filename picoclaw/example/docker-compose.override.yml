@@ -6,6 +6,4 @@ x-volumes: &claw-volumes
 services:
   picoclaw:
     volumes: *claw-volumes
-    #extra_hosts:
-    #  - "host.docker.internal:host-gateway"
 

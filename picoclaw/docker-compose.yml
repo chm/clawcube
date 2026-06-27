@@ -1,6 +1,7 @@
 services:
   picoclaw:
     container_name: ${COMPOSE_PROJECT_NAME}-gw
+    hostname: picoClaw-gw
     image: localhost/picoclaw
     build:
       context: ./build/
@@ -8,10 +9,11 @@ services:
         ALPINE_MIRROR: ${ALPINE_MIRROR:-}
         EXTRA_PKGS: ${EXTRA_PKGS:-}
     restart: unless-stopped
-    hostname: pico-gw
     environment:
       - PICOCLAW_GATEWAY_HOST=0.0.0.0
       - TZ=Asia/Shanghai
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "${PICOCLAW_WEB_PORT}:18800"
       - "${PICOCLAW_GW_PORT}:18790"
