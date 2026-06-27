@@ -1,12 +1,10 @@
 name: zeroclaw
 
 x-volumes: &claw-volumes
-  - ../../data/zeroclaw/data:/zeroclaw-data
+  - ../../data/zeroclaw/home:/home/claw
 
 services:
   zeroclaw:
     volumes: *claw-volumes
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
 #

@@ -28,3 +28,8 @@ ARG ZEROCLAW_GID
 RUN groupadd -g ${ZEROCLAW_GID} claw && useradd -u ${ZEROCLAW_UID} -g ${ZEROCLAW_GID} -m claw
 
 USER claw
+
+ENV HOME=/home/claw
+ENV ZEROCLAW_DATA_DIR=/home/claw/data
+
+WORKDIR /home/claw

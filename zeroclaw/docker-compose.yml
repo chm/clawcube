@@ -20,7 +20,9 @@ services:
     env_file:
       - app.env
     volumes:
-      - zeroclaw-data:/zeroclaw-data
+      - home:/home/claw
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "${ZEROCLAW_PORT:-127.0.0.1:42617}:42617"
     healthcheck:
@@ -31,4 +33,4 @@ services:
       start_period: 10s
 
 volumes:
-  zeroclaw-data:
+  home:
