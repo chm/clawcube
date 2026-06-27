@@ -1,6 +1,7 @@
 services:
   gateway:
     container_name: ${COMPOSE_PROJECT_NAME}-gw
+    hostname: openClaw-gw
     image: localhost/clawcube:${OPENCLAW_VER}
     build:
       context: ./build/
@@ -8,21 +9,28 @@ services:
         DEBIAN_MIRROR: ${DEBIAN_MIRROR:-}
         EXTRA_PKGS: ${EXTRA_PKGS:-}
         OPENCLAW_VER: ${OPENCLAW_VER}
+    restart: unless-stopped
     environment:
       HOME: /home/claw
+      OPENCLAW_HOME: /home/claw
       TERM: xterm-256color
       TZ: ${OPENCLAW_TZ:-UTC}
     env_file:
-      - .env.local
-    hostname: clawCube-gw
+      - app.env
     volumes:
       - home:/home/claw
       - log:/tmp/openclaw
+    cap_drop:
+      - NET_RAW
+      - NET_ADMIN
+    security_opt:
+      - no-new-privileges:true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "${OPENCLAW_GATEWAY_PORT:-18789}:18789"
       #- "${OPENCLAW_BRIDGE_PORT:-18790}:18790"
     init: true
-    restart: unless-stopped
     command: [
       "node", "openclaw.mjs", "gateway",
       #"--bind", "${OPENCLAW_GATEWAY_BIND:-lan}",
@@ -32,18 +40,19 @@ services:
   cli:
     image: localhost/clawcube:${OPENCLAW_VER}
     network_mode: "service:gateway"
+    environment:
+      HOME: /home/claw
+      OPENCLAW_HOME: /home/claw
+      TERM: xterm-256color
+      BROWSER: echo
+      TZ: ${OPENCLAW_TZ:-UTC}
+    env_file:
+      - app.env
     cap_drop:
       - NET_RAW
       - NET_ADMIN
     security_opt:
       - no-new-privileges:true
-    environment:
-      HOME: /home/claw
-      TERM: xterm-256color
-      BROWSER: echo
-      TZ: ${OPENCLAW_TZ:-UTC}
-    env_file:
-      - .env.local
     volumes:
       - home:/home/claw
       - log:/tmp/openclaw

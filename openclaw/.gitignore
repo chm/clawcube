@@ -1,4 +1,4 @@
 # OpenClaw config files
-/.env.*
+/app.env
 /docker-compose.override.yml
 

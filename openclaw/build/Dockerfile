@@ -3,7 +3,7 @@ ARG NODE_IMAGE="node:24-trixie"
 FROM ${NODE_IMAGE}
 
 # Debian mirror (empty = use image defaults)
-ARG DEBIAN_MIRROR=""
+ARG DEBIAN_MIRROR
 
 # Extra APT packages
 ARG BASE_PKGS="iproute2 jq"
@@ -11,7 +11,6 @@ ARG EXTRA_PKGS
 RUN --mount=type=cache,id=openclaw-trixie-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-trixie-apt-lists,target=/var/lib/apt,sharing=locked \
     set -ex ; \
-    userdel -r node ; groupadd -g 1000 claw ; useradd -u 1000 -g 1000 -m claw ; \
     if [ -n "$DEBIAN_MIRROR" ]; then \
       MIRROR="$(echo "$DEBIAN_MIRROR" | sed 's#/$##')" ; \
       sed -i -E "s|URIs: http://deb\.debian\.org/debian$|URIs: ${MIRROR}/debian|" /etc/apt/sources.list.d/debian.sources ; \
@@ -38,6 +37,8 @@ RUN --mount=type=cache,id=openclaw-pnpm-cache,target=/root,sharing=locked \
     rm -fr /.pnpm-store ; \
     ln -s node_modules/openclaw/openclaw.mjs "$INSTALL_DIR"/openclaw.mjs ; \
     ln -s "$INSTALL_DIR"/openclaw.mjs /usr/local/bin/openclaw
+
+RUN userdel -r node && groupadd -g 1000 claw && useradd -u 1000 -g 1000 -m claw
 
 USER claw
 

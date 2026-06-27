@@ -1,4 +1,4 @@
-name: clawcube
+name: openclaw
 
 x-volumes: &claw-volumes
   - ../../data/openclaw/home:/home/claw
