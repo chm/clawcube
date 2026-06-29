@@ -2,7 +2,7 @@ services:
   gateway:
     container_name: ${COMPOSE_PROJECT_NAME}-gw
     hostname: openClaw-gw
-    image: localhost/clawcube:${OPENCLAW_VER}
+    image: localhost/openclaw:${OPENCLAW_VER}
     build:
       context: ./build/
       args:
@@ -38,7 +38,7 @@ services:
     ]
 
   cli:
-    image: localhost/clawcube:${OPENCLAW_VER}
+    image: localhost/openclaw:${OPENCLAW_VER}
     network_mode: "service:gateway"
     environment:
       HOME: /home/claw
