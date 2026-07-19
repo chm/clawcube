@@ -3,3 +3,11 @@ general_settings:
   store_model_in_db: true
   store_prompts_in_spend_logs: true
 
+mcp_servers:
+  exa_search:
+    alias: "exa_search"
+    url: "https://mcp.exa.ai/mcp"
+    transport: http
+    auth_type: api_key
+    auth_value: "os.environ/EXA_API_KEY"
+
