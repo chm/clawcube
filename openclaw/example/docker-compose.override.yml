@@ -15,6 +15,7 @@ services:
     volumes: *claw-volumes
 
   tailscale:
+    container_name: ${COMPOSE_PROJECT_NAME}-tailscale
     image: docker.io/tailscale/tailscale:stable
     network_mode: "service:gateway"
     environment:
