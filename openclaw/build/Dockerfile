@@ -6,7 +6,7 @@ FROM ${NODE_IMAGE}
 ARG DEBIAN_MIRROR
 
 # Extra APT packages
-ARG BASE_PKGS="iproute2 jq"
+ARG BASE_PKGS="iproute2 jq iputils-ping unzip"
 ARG EXTRA_PKGS
 RUN --mount=type=cache,id=openclaw-trixie-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-trixie-apt-lists,target=/var/lib/apt,sharing=locked \
