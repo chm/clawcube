@@ -27,6 +27,9 @@ ARG ZEROCLAW_UID
 ARG ZEROCLAW_GID
 RUN groupadd -g ${ZEROCLAW_GID} claw && useradd -u ${ZEROCLAW_UID} -g ${ZEROCLAW_GID} -m claw
 
+COPY --chown=root:root ./cacerts/* /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
 USER claw
 
 ENV HOME=/home/claw

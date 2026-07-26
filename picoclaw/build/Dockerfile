@@ -14,6 +14,9 @@ RUN set -ex ; \
 
 RUN addgroup -g 1000 claw && adduser -D -u 1000 -G claw claw
 
+COPY --chown=root:root ./cacerts/* /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
 USER claw
 
 #

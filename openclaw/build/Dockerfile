@@ -40,6 +40,10 @@ RUN --mount=type=cache,id=openclaw-pnpm-cache,target=/root,sharing=locked \
 
 RUN userdel -r node && groupadd -g 1000 claw && useradd -u 1000 -g 1000 -m claw
 
+COPY --chown=root:root ./cacerts/* /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+ENV NODE_EXTRA_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
+
 USER claw
 
 ENV NODE_ENV="production"

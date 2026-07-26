@@ -2,4 +2,6 @@
 /app.env
 /docker-compose.override.yml
 
+/build/cacerts/*
+
 #
