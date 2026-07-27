@@ -33,7 +33,9 @@ litellm/
 
 ```
 LITELLM_MASTER_KEY=             # 必填，OpenAI 兼容 API 的 Bearer token，例 sk-xxx
+
 STORE_MODEL_IN_DB="True"        # model / key 允许走 DB 管理
+LITELLM_DROP_PARAMS="True"     # 自动丢弃 provider 不认识的参数，避免报错
 ```
 
 `docker-compose.yml` 里写死了 db 连接串 `postgresql://llmproxy:dbpassword9090@db:5432/litellm`，**改密码需同步改 compose 和 db service**，不建议改。

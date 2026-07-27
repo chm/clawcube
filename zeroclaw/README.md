@@ -9,8 +9,9 @@ ZeroClaw 由 zeroclaw-labs 出品（[github.com/zeroclaw-labs/zeroclaw](https://
 本目录是对上游 Debian 镜像的薄封装：
 
 - 基础镜像：`ghcr.io/zeroclaw-labs/zeroclaw[:TAG]-debian`
-- 装 `iproute2 jq` + `EXTRA_PKGS`
+- 装 `iproute2 jq iputils-ping unzip` + `EXTRA_PKGS`
 - 切到 uid/gid=1000 的 `claw` 用户（`OPENCLAW_HOME`-style：HOME=/home/claw，DATA_DIR=/home/claw/data）
+- 构建时支持自定义 CA 证书（放入 `build/cacerts/` 目录）
 
 镜像 tag 由 `ZEROCLAW_VER` 控制；不指定时取 `:-latest`，需要锁版本时显式填。
 
@@ -36,6 +37,15 @@ zeroclaw/
 | `ZEROCLAW_UID` / `ZEROCLAW_GID` | 容器内用户 | 默认 `1000` |
 | `DEBIAN_MIRROR` | Debian APT 镜像 | 留空用默认 |
 | `EXTRA_PKGS` | 额外包 | 默认 `exa ripgrep` |
+
+### 自定义 CA 证书
+
+将内部 CA 的 `.crt` 文件放入 `build/cacerts/` 目录（已 gitignore，只留 `.keep` 占位），构建时会自动拷入 `/usr/local/share/ca-certificates/` 并执行 `update-ca-certificates`。
+
+```bash
+cp /path/to/internal-ca.crt zeroclaw/build/cacerts/
+cd zeroclaw && docker compose build
+```
 
 ### `app.env`（运行时）
 

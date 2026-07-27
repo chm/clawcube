@@ -41,6 +41,7 @@
 <service>/
 ├── docker-compose.yml            # 基础 compose（命名卷 / 默认端口）
 ├── build/Dockerfile              # 对上游镜像的薄封装（litellm / caddy 没有 Dockerfile）
+├── build/cacerts/                # 自定义 CA 证书目录（*.crt 放进去构建时自动注入 trust store）
 ├── .env                          # 端口 / 镜像源 / 版本
 ├── example/                      # 模板（实例文件全部 gitignored，按需 cp 出来）
 │   ├── .env / app.env / Caddyfile / litellm_config.yaml / ...
