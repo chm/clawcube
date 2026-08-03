@@ -1,9 +1,7 @@
 name: picoclaw
 
-x-volumes: &claw-volumes
-  - ../../data/picoclaw/home:/home/claw
-
 services:
   picoclaw:
-    volumes: *claw-volumes
+    volumes: &claw-volumes
+      - ../../data/picoclaw/home:/home/claw
 

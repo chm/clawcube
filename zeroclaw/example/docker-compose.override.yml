@@ -1,10 +1,8 @@
 name: zeroclaw
 
-x-volumes: &claw-volumes
-  - ../../data/zeroclaw/home:/home/claw
-
 services:
   zeroclaw:
-    volumes: *claw-volumes
+    volumes: &claw-volumes
+      - ../../data/zeroclaw/home:/home/claw
 
 #

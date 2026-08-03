@@ -1,14 +1,12 @@
 name: openclaw
 
-x-volumes: &claw-volumes
-  - ../../data/openclaw/home:/home/claw
-  - ../../data/openclaw/log:/tmp/openclaw
-
 services:
   gateway:
     #network_mode: host
     #ports: !reset []
-    volumes: *claw-volumes
+    volumes: &claw-volumes
+      - ../../data/openclaw/home:/home/claw
+      - ../../data/openclaw/log:/tmp/openclaw
 
   cli:
     #network_mode: host
