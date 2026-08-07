@@ -3,7 +3,7 @@ FROM ghcr.io/sipeed/picoclaw:launcher
 # Alpine mirror (empty = use image default)
 ARG ALPINE_MIRROR
 
-ARG BASE_PKGS="bash curl git iproute2 jq openssh-client-default"
+ARG BASE_PKGS="bash curl git git-lfs iproute2 jq openssh-client-default vim"
 ARG EXTRA_PKGS
 RUN set -ex ; \
     if [ -n "$ALPINE_MIRROR" ]; then \
