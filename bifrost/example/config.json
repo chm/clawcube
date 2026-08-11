@@ -1,9 +1,16 @@
 {
   "$schema": "https://www.getbifrost.ai/schema",
   "auth_config": {
-    "is_enabled": true,
     "admin_username": "env.BIFROST_ADMIN_USERNAME",
-    "admin_password": "env.BIFROST_ADMIN_PASSWORD"
+    "admin_password": "env.BIFROST_ADMIN_PASSWORD",
+    "is_enabled": true
+  },
+  "client": {
+    "enforce_auth_on_inference": true,
+    "allowed_origins": [
+      "https://bifrost.clawcube.lan",
+      "http://127.0.0.1:8080"
+    ]
   },
   "config_store": {
     "enabled": true,
