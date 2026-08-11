@@ -24,6 +24,11 @@ clawcube.lan {
   file_server
 }
 
+bifrost.clawcube.lan {
+  import conf-ca-clawcube
+  reverse_proxy 127.0.0.1:4001
+}
+
 litellm.clawcube.lan {
   import conf-ca-clawcube
 

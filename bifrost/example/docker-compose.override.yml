@@ -1,0 +1,7 @@
+name: bifrost
+
+services:
+  bifrost:
+    volumes:
+      - ./config.json:/app/data/config.json
+      - ../../data/bifrost/data:/app/data

@@ -1,0 +1,10 @@
+# Secrets
+/app.env
+
+# Config
+/config.json
+
+# Override
+/docker-compose.override.yml
+
+#
