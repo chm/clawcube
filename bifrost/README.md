@@ -29,7 +29,7 @@ bifrost/
 
 ```
 BIFROST_VER="latest"              # 镜像版本
-BIFROST_PORT="127.0.0.1:4001"     # 宿主端口绑定
+BIFROST_PORT="0.0.0.0:4001"       # 宿主端口绑定
 LOG_LEVEL="info"                  # debug / info / warn / error
 LOG_STYLE="json"                  # json / text
 ```

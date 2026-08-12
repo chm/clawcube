@@ -7,10 +7,13 @@
   },
   "client": {
     "enforce_auth_on_inference": true,
+    "allow_direct_keys": false,
     "allowed_origins": [
       "https://bifrost.clawcube.lan",
       "http://127.0.0.1:8080"
     ]
+  },
+  "providers": {
   },
   "config_store": {
     "enabled": true,
