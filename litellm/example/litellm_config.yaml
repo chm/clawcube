@@ -65,7 +65,6 @@ model_list:
       custom_llm_provider: anthropic
       litellm_credential_name: OpenCode-Anthropic
     model_info:
-      blocked: true
       max_input_tokens:  1000000
       max_output_tokens:   65536
       max_tokens:          65536
