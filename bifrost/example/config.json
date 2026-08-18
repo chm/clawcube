@@ -14,19 +14,5 @@
     ]
   },
   "providers": {
-  },
-  "config_store": {
-    "enabled": true,
-    "type": "sqlite",
-    "config": {
-      "path": "/app/data/config.db"
-    }
-  },
-  "logs_store": {
-    "enabled": true,
-    "type": "sqlite",
-    "config": {
-      "path": "/app/data/logs.db"
-    }
   }
 }
