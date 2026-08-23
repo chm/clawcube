@@ -202,6 +202,19 @@ model_list:
       output_cost_per_token:           0.00000058
       cache_read_input_token_cost:     0.000000035
       #cache_creation_input_token_cost: 0.00000000
+  - model_name: ox-alpha
+    litellm_params:
+      model: ox-alpha-free
+      custom_llm_provider: openai
+      litellm_credential_name: OpenCode-OpenAI
+    model_info:
+      max_input_tokens:  1048576
+      max_output_tokens: 131072
+      max_tokens:        131072
+      input_cost_per_token:            0.00000000
+      output_cost_per_token:           0.00000000
+      cache_read_input_token_cost:     0.00000000
+      #cache_creation_input_token_cost: 0.00000000
 
 
 mcp_servers:
