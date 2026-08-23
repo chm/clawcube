@@ -72,6 +72,19 @@ model_list:
       output_cost_per_token:           0.00000750
       cache_read_input_token_cost:     0.00000050
       cache_creation_input_token_cost: 0.000003125
+  - model_name: deepseek-v4-flash-vision-exp
+    litellm_params:
+      model: deepseek-v4-flash-vision-exp
+      custom_llm_provider: openai
+      litellm_credential_name: OpenCode-OpenAI
+    model_info:
+      max_input_tokens:  1000000
+      max_output_tokens:  384000
+      max_tokens:         384000
+      input_cost_per_token:            0.00000022
+      output_cost_per_token:           0.00000066
+      cache_read_input_token_cost:     0.000000007
+      #cache_creation_input_token_cost: 0.00000000
   - model_name: deepseek-v4-flash
     litellm_params:
       model: deepseek-v4-flash
@@ -81,9 +94,9 @@ model_list:
       max_input_tokens:  1000000
       max_output_tokens:  384000
       max_tokens:         384000
-      input_cost_per_token:            0.00000014
-      output_cost_per_token:           0.00000028
-      cache_read_input_token_cost:     0.0000000028
+      input_cost_per_token:            0.00000022
+      output_cost_per_token:           0.00000066
+      cache_read_input_token_cost:     0.000000007
       #cache_creation_input_token_cost: 0.00000000
   - model_name: deepseek-v4-pro
     litellm_params:
@@ -94,9 +107,9 @@ model_list:
       max_input_tokens:  1000000
       max_output_tokens:  384000
       max_tokens:         384000
-      input_cost_per_token:            0.000000435
-      output_cost_per_token:           0.00000087
-      cache_read_input_token_cost:     0.000000003625
+      input_cost_per_token:            0.00000066
+      output_cost_per_token:           0.00000198
+      cache_read_input_token_cost:     0.000000022
       #cache_creation_input_token_cost: 0.00000000
   - model_name: mimo-v2.5
     litellm_params:
