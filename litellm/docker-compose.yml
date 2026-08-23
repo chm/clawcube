@@ -7,6 +7,7 @@ services:
       - "127.0.0.1:4000:4000"
     environment:
       DATABASE_URL: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
+      LITELLM_DISABLE_NO_REDIS_WARNING: true
     env_file:
       - .env
     depends_on:
