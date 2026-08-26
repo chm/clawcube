@@ -224,4 +224,11 @@ mcp_servers:
     transport: http
     auth_type: api_key
     auth_value: "os.environ/EXA_API_KEY"
+  tavily_search:
+    alias: "tavily_search"
+    url: "https://mcp.tavily.com/mcp/?tavilyApiKey=${TAVILY_API_KEY}"
+    transport: http
+    variables:
+      TAVILY_API_KEY:
+        value: "os.environ/TAVILY_API_KEY"
 
