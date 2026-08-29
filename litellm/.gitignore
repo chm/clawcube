@@ -1,7 +1,10 @@
-#
-/docker-compose.override.yml
-/.env
+# Secrets
+/app.env
 
+# Config
 /litellm_config.yaml
+
+# Override
+/docker-compose.override.yml
 
 #

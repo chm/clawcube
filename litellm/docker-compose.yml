@@ -1,7 +1,7 @@
 services:
   litellm:
     container_name: litellm
-    image: ghcr.io/berriai/litellm:main-stable
+    image: ghcr.io/berriai/litellm:${LITELLM_VER:-main-stable}
     restart: unless-stopped
     ports:
       - "127.0.0.1:4000:4000"
@@ -9,7 +9,7 @@ services:
       DATABASE_URL: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
       LITELLM_DISABLE_NO_REDIS_WARNING: true
     env_file:
-      - .env
+      - app.env
     depends_on:
       db:
         condition: service_healthy
