@@ -33,6 +33,19 @@ model_list:
       output_cost_per_token:           0.00000120
       cache_read_input_token_cost:     0.00000006
       #cache_creation_input_token_cost: 0.00000000
+  - model_name: qwen3.8-flash
+    litellm_params:
+      model: qwen3.8-flash
+      custom_llm_provider: anthropic
+      litellm_credential_name: OpenCode-Anthropic
+    model_info:
+      max_input_tokens:  1000000
+      max_output_tokens:  131072
+      max_tokens:         131072
+      input_cost_per_token:            0.00000015
+      output_cost_per_token:           0.00000047
+      cache_read_input_token_cost:     0.000000016
+      cache_creation_input_token_cost: 0.00000020
   - model_name: qwen3.8-max
     litellm_params:
       model: qwen3.8-max
@@ -40,8 +53,8 @@ model_list:
       litellm_credential_name: OpenCode-Anthropic
     model_info:
       max_input_tokens:  1000000
-      max_output_tokens:   65536
-      max_tokens:          65536
+      max_output_tokens:  131072
+      max_tokens:         131072
       input_cost_per_token:            0.00000200
       output_cost_per_token:           0.00000600
       cache_read_input_token_cost:     0.00000025
