@@ -1,8 +1,7 @@
 name: hermes
 
 services:
-  gateway:
+  hermes:
     #network_mode: host
     volumes: &hermes-volumes
       - ../../data/hermes/data:/opt/data
-

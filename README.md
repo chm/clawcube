@@ -1,6 +1,6 @@
 # clawCube
 
-> 多服务 Docker Compose 栈：三个 AI Agent Gateway（[OpenClaw](https://docs.openclaw.ai) / [PicoClaw](https://github.com/sipeed/picoclaw) / [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw)）+ [LiteLLM](https://github.com/BerriAI/litellm) 代理 + [Bifrost](https://github.com/maximhq/bifrost) LLM 网关 + [Caddy](https://caddyserver.com/) 反代。
+> 多服务 Docker Compose 栈：四个 AI Agent Gateway（[OpenClaw](https://docs.openclaw.ai) / [PicoClaw](https://github.com/sipeed/picoclaw) / [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) / [Hermes](https://github.com/NousResearch/hermes-agent)）+ [LiteLLM](https://github.com/BerriAI/litellm) 代理 + [Bifrost](https://github.com/maximhq/bifrost) LLM 网关 + [Caddy](https://caddyserver.com/) 反代。
 
 把几个 LLM / Agent 相关组件各自装进一个独立子目录，由各自的 `docker-compose.yml` 单独管理。子目录之间通过 loopback 端口 + Caddy 反代串起来。
 
@@ -13,11 +13,12 @@
 | [`openclaw/`](openclaw/) | `127.0.0.1:18789` | OpenClaw AI Agent Gateway（主 runtime） | [→](openclaw/README.md) |
 | [`picoclaw/`](picoclaw/) | `127.0.0.1:18800` | PicoClaw 轻量 Web Gateway | [→](picoclaw/README.md) |
 | [`zeroclaw/`](zeroclaw/) | `127.0.0.1:42617` | ZeroClaw 替代 AI Agent runtime | [→](zeroclaw/README.md) |
+| [`hermes/`](hermes/) | `127.0.0.1:9119` | Hermes Agent Gateway（NousResearch） | [→](hermes/README.md) |
 | [`litellm/`](litellm/) | `127.0.0.1:4000` | LiteLLM 统一代理（OpenAI 兼容）+ Postgres 存储 | [→](litellm/README.md) |
 | [`bifrost/`](bifrost/) | `127.0.0.1:4001` | Bifrost LLM 网关（多 provider 路由 / fallback / 日志） | [→](bifrost/README.md) |
 | [`caddy/`](caddy/) | host `80/443` | Caddy 反代 + 内网 CA（`*.clawcube.lan`） | [→](caddy/README.md) |
 
-三个 AI runtime **互不依赖**，按需起哪个都行。
+四个 AI runtime **互不依赖**，按需起哪个都行。
 
 ## 拓扑
 
@@ -27,12 +28,12 @@
                        ▼
 ┌──────────────────────────────────────────────────────────┐
 │  Caddy  (network_mode: host)                             │   clawcube.lan → /www
-└──┬─────────┬──────────┬──────────┬──────────┬────────────┘
-   │         │          │          │          │
-   ▼         ▼          ▼          ▼          ▼
-openclaw  picoclaw   zeroclaw   litellm    bifrost
- :18789    :18800     :42617     :4000      :4001
-                                 (+ PG :5432)
+└──┬─────────┬──────────┬──────────┬──────────┬─────────┬──┘
+   │         │          │          │          │         │
+   ▼         ▼          ▼          ▼          ▼         ▼
+openclaw  picoclaw   zeroclaw    hermes    litellm    bifrost
+ :18789    :18800     :42617     :9119     :4000      :4001
+                                            (+ PG :5432)
 ```
 
 ## 通用模式
@@ -74,6 +75,7 @@ override 常见两个用途：
     ├── openclaw/{home,log[,tailscale]}
     ├── picoclaw/home
     ├── zeroclaw/home
+    ├── hermes/data
     ├── litellm/postgres_data
     ├── bifrost/data
     └── caddy/{www,data,log}
@@ -85,7 +87,7 @@ override 常见两个用途：
 
 ```bash
 # 0) 准备持久化目录
-mkdir -p ../data/{openclaw/{home,log,tailscale},picoclaw/home,zeroclaw/home,litellm/postgres_data,bifrost/data,caddy/{www,data,log}}
+mkdir -p ../data/{openclaw/{home,log,tailscale},picoclaw/home,zeroclaw/home,hermes/data,litellm/postgres_data,bifrost/data,caddy/{www,data,log}}
 
 # 1) 按需起 AI runtime — 三选一或多选
 ( cd openclaw && cp -n example/app.env ./app.env \
@@ -96,6 +98,9 @@ mkdir -p ../data/{openclaw/{home,log,tailscale},picoclaw/home,zeroclaw/home,lite
 ( cd zeroclaw && cp -n example/app.env ./app.env \
                 && cp -n example/docker-compose.override.yml ./docker-compose.override.yml \
                 && docker compose up -d )
+( cd hermes && cp -n example/app.env ./app.env \
+               && cp -n example/docker-compose.override.yml ./docker-compose.override.yml \
+               && docker compose up -d )
 
 # 2) LiteLLM
 ( cd litellm && cp -n example/.env ./.env \

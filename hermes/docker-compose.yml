@@ -1,8 +1,13 @@
-
 services:
   hermes:
     container_name: hermes
-    image: docker.io/nousresearch/hermes-agent:v${HERMES_VER}
+    image: localhost/hermes:${HERMES_VER}
+    build:
+      context: ./build/
+      args:
+        HERMES_VER: ${HERMES_VER}
+        DEBIAN_MIRROR: ${DEBIAN_MIRROR:-}
+        EXTRA_PKGS: ${EXTRA_PKGS:-}
     restart: unless-stopped
     command: ["gateway", "run"]
     environment:
