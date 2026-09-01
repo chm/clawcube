@@ -9,7 +9,7 @@ LiteLLM 代理 + Postgres 后端的 Docker 容器配置。
 | service | 端口 | 说明 |
 | --- | --- | --- |
 | `litellm` | `127.0.0.1:4000` | 代理主进程，OpenAI 兼容 API |
-| `db` | `127.0.0.1:5432` | Postgres 16，存 model / key / spend log |
+| `db` | `127.0.0.1:5432` | Postgres 17，存 model / key / spend log |
 
 上游镜像：`ghcr.io/berriai/litellm:main-stable`，自带 `litellm` CLI。
 
