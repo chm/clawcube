@@ -18,33 +18,36 @@ RUN set -ex ; \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y --no-install-recommends ; \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       $BASE_PKGS $EXTRA_PKGS ; \
-    apt-get dist-clean
-
-ENV INSTALL_DIR="/app"
-WORKDIR ${INSTALL_DIR}
-
-RUN --mount=type=cache,id=openclaw-tmp-cache,target=/tmp,sharing=locked \
-    corepack enable
-
-# OpenClaw version
-ARG OPENCLAW_VER="latest"
-RUN --mount=type=cache,id=openclaw-pnpm-cache,target=/root,sharing=locked \
-    --mount=type=cache,id=openclaw-tmp-cache,target=/tmp,sharing=locked \
-    set -ex ; \
-    export PNPM_HOME=/.pnpm-store ; \
-    corepack use pnpm@latest-10 ; \
-    pnpm install --dir "$INSTALL_DIR" openclaw@"$OPENCLAW_VER" ; \
-    rm -fr /.pnpm-store ; \
-    ln -s node_modules/openclaw/openclaw.mjs "$INSTALL_DIR"/openclaw.mjs ; \
-    ln -s "$INSTALL_DIR"/openclaw.mjs /usr/local/bin/openclaw
-
-RUN userdel -r node && groupadd -g 1000 claw && useradd -u 1000 -g 1000 -m claw
+    apt-get dist-clean ; \
+    userdel -r node && groupadd -g 1000 claw && useradd -u 1000 -g 1000 -m claw
 
 COPY --chown=root:root ./cacerts/* /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 ENV NODE_EXTRA_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
 
+ENV INSTALL_DIR="/app"
+WORKDIR ${INSTALL_DIR}
+
+RUN --mount=type=tmpfs,target=/tmp \
+    corepack enable ; \
+    chown claw:claw "$INSTALL_DIR" ; \
+    ln -s "$INSTALL_DIR"/openclaw.mjs /usr/local/bin/openclaw
+
 USER claw
+
+# OpenClaw version
+ARG OPENCLAW_VER="latest"
+RUN set -ex ; \
+    export XDG_CACHE_HOME=/tmp/xdg-cache ; \
+    export XDG_CONFIG_HOME=/tmp/xdg-config ; \
+    export XDG_DATA_HOME=/tmp/xdg-data ; \
+    export XDG_STATE_HOME=/tmp/xdg-state; \
+    export NPM_CONFIG_CACHE=/tmp/npm-cache ; \
+    export PNPM_HOME=/tmp/pnpm-store ; \
+    corepack use pnpm@latest-10 ; \
+    pnpm install --dir "$INSTALL_DIR" openclaw@"$OPENCLAW_VER" ; \
+    ln -s node_modules/openclaw/openclaw.mjs "$INSTALL_DIR"/openclaw.mjs ; \
+    rm -fr /tmp/*
 
 ENV NODE_ENV="production"
 ENV NODE_COMPILE_CACHE="/var/tmp/openclaw-compile-cache"
