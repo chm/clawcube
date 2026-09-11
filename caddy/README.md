@@ -16,6 +16,8 @@ Caddy 反向代理 + 内部 CA 配置。
 | 域名 | 后端 |
 | --- | --- |
 | `clawcube.lan` | `/www` 静态文件 |
+| `bifrost.clawcube.lan` | `127.0.0.1:4001` |
+| `hermes.clawcube.lan` | `127.0.0.1:9119` |
 | `litellm.clawcube.lan` | `127.0.0.1:4000` |
 | `openclaw.clawcube.lan` | `127.0.0.1:18789` |
 | `picoclaw.clawcube.lan` | `127.0.0.1:18800` |

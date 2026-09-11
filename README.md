@@ -151,4 +151,4 @@ rm -rf ../data/litellm/postgres_data
 
 - Docker Engine + Compose **v2**（命令是 `docker compose`，没连字符）
 - Caddy 需要 root / 占用 `80`/`443`（host network）
-- LiteLLM 自带 Postgres 16，无需宿主安装
+- LiteLLM 自带 Postgres 17，无需宿主安装
