@@ -5,6 +5,18 @@ general_settings:
 
 
 credential_list:
+  - credential_name: CmdCode-Anthropic
+    credential_info:
+      custom_llm_provider: Anthropic
+    credential_values:
+      api_base: "https://api.commandcode.ai/provider"
+      api_key: os.environ/COMMANDCODE_API_KEY
+  - credential_name: CmdCode-OpenAI
+    credential_info:
+      custom_llm_provider: OpenAI_Compatible
+    credential_values:
+      api_base: "https://api.commandcode.ai/provider/v1"
+      api_key: os.environ/COMMANDCODE_API_KEY
   - credential_name: OpenCode-Anthropic
     credential_info:
       custom_llm_provider: Anthropic
