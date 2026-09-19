@@ -185,8 +185,8 @@ model_list:
         x-cmd-zdr: "1"
     model_info:
       max_input_tokens:  1000000
-      max_output_tokens:   32768
-      max_tokens:          32768
+      max_output_tokens:  128000
+      max_tokens:         128000
       input_cost_per_token:            0.00000300
       output_cost_per_token:           0.00001500
       cache_read_input_token_cost:     0.00000030
