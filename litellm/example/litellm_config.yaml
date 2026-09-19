@@ -129,6 +129,37 @@ model_list:
       cache_read_input_token_cost_above_256k_tokens:     0.00000024
       cache_creation_input_token_cost_above_256k_tokens: 0.00000150
 
+  - model_name: glm-5.3-flash
+    litellm_params:
+      model: z-ai/glm-5.3-flash
+      custom_llm_provider: openai
+      litellm_credential_name: CmdCode-OpenAI
+      extra_headers:
+        x-cmd-zdr: "1"
+    model_info:
+      max_input_tokens:  1000000
+      max_output_tokens:  128000
+      max_tokens:         128000
+      input_cost_per_token:            0.00000015
+      output_cost_per_token:           0.00000050
+      cache_read_input_token_cost:     0.00000003
+      #cache_creation_input_token_cost: 0.000
+  - model_name: glm-5.3
+    litellm_params:
+      model: zai-org/glm-5.3
+      custom_llm_provider: openai
+      litellm_credential_name: CmdCode-OpenAI
+      extra_headers:
+        x-cmd-zdr: "1"
+    model_info:
+      max_input_tokens:  1000000
+      max_output_tokens:  128000
+      max_tokens:         128000
+      input_cost_per_token:            0.00000140
+      output_cost_per_token:           0.00000440
+      cache_read_input_token_cost:     0.00000026
+      #cache_creation_input_token_cost: 0.000
+
   - model_name: minimax-m3
     litellm_params:
       model: minimaxai/minimax-m3
