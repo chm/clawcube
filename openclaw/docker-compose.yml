@@ -39,7 +39,7 @@ services:
 
   cli:
     image: localhost/openclaw:${OPENCLAW_VER}
-    network_mode: "service:gateway"
+    #network_mode: "service:gateway"
     environment:
       HOME: /home/claw
       OPENCLAW_HOME: /home/claw
