@@ -6,7 +6,7 @@ FROM ${NODE_IMAGE}
 ARG DEBIAN_MIRROR
 
 # Extra APT packages
-ARG BASE_PKGS="git-lfs iproute2 iputils-ping jq unzip vim"
+ARG BASE_PKGS="acl e2fsprogs git-lfs iproute2 iputils-ping jq unzip vim"
 ARG EXTRA_PKGS
 RUN set -ex ; \
     if [ -n "$DEBIAN_MIRROR" ]; then \
