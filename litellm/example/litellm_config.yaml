@@ -245,3 +245,13 @@ model_list:
       cache_read_input_token_cost:     0.0000000036
       #cache_creation_input_token_cost: 0.000
 
+  - model_name: jev
+    litellm_params:
+      model: typesafe/typesafe/jev-1.14.0
+      custom_llm_provider: typesafe
+      litellm_credential_name: CmdCode-Anthropic
+    model_info:
+      max_input_tokens:   64000
+      input_cost_per_token:            0.000000042
+      output_cost_per_token:           0.0
+
