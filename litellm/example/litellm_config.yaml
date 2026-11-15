@@ -17,18 +17,6 @@ credential_list:
     credential_values:
       api_base: "https://api.commandcode.ai/provider/v1"
       api_key: os.environ/COMMANDCODE_API_KEY
-  - credential_name: OpenCode-Anthropic
-    credential_info:
-      custom_llm_provider: Anthropic
-    credential_values:
-      api_base: "https://opencode.ai/zen/go"
-      api_key: os.environ/OPENCODE_API_KEY
-  - credential_name: OpenCode-OpenAI
-    credential_info:
-      custom_llm_provider: OpenAI_Compatible
-    credential_values:
-      api_base: "https://opencode.ai/zen/go/v1"
-      api_key: os.environ/OPENCODE_API_KEY
 
 
 mcp_servers:
